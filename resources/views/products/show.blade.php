@@ -13,7 +13,7 @@
                     {{-- detail component --}}
                     <x-product.showDetail>
                         <x-slot:image>{{ $product->image}}</x-slot>
-                        <x-slot:description>{{ $product->description}}</x-slot>
+                        <x-slot:description>{!! $product->description !!}</x-slot>
                         <x-slot:price>{{ $product->price}}</x-slot>
                         <x-slot:stock>{{ $product->stock}}</x-slot>
                         <x-slot:name>{{ $product->name}}</x-slot>
