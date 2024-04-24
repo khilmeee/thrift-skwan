@@ -21,7 +21,7 @@
                 @forelse ($products as $product )
                     <x-table.row>
                         <x-table.column>
-                            <img src="{{ asset('/storage/products/'.$product->image) }}" class="rounded" style="width: 150px">
+                            <img src="{{ $product->image }}" class="rounded" style="width: 150px">
                         </x-table.column>
                         <x-table.column>
                             {{ $product->title }}

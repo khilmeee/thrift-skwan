@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -43,11 +42,12 @@ class ProductController extends Controller
 
         //upload image
         $image = $request->file('image');
-        $image->storeAs('public/products', $image->hashName());
+        $imgD = file_get_contents($image);
+        $imgData = "data:image/png;base64,".base64_encode($imgD);
 
         //create product
         Product::create([
-            'image'         => $image->hashName(),
+            'image'         => $imgData,
             'title'         => $request->title,
             'description'   => $request->description,
             'price'         => $request->price,
@@ -108,14 +108,12 @@ class ProductController extends Controller
 
             //upload new image
             $image = $request->file('image');
-            $image->storeAs('public/products', $image->hashName());
-
-            //delete old image
-            Storage::delete('public/products/'.$product->image);
+            $imgD = file_get_contents($image);
+            $imgData = "data:image/png;base64,".base64_encode($imgD);
 
             //update product with new image
             $product->update([
-                'image'         => $image->hashName(),
+                'image'         => $imgData,
                 'title'         => $request->title,
                 'description'   => $request->description,
                 'price'         => $request->price,
@@ -141,9 +139,6 @@ class ProductController extends Controller
     {
         //get product by ID
         $product = Product::findOrFail($id);
-
-        //delete image
-        Storage::delete('public/products/'. $product->image);
 
         //delete product
         $product->delete();
