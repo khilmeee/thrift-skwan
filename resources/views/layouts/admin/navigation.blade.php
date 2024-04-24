@@ -12,8 +12,14 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                        {{ __('AdminDashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.user.index')" :active="request()->routeIs('admin.user.index')">
+                        {{ __('Users') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.product.index')" :active="request()->routeIs('admin.product.index')">
+                        {{ __('Product') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -38,11 +44,9 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        @if(Auth::user()->isAdmin())
-                            <x-dropdown-link :href="route('admin.index')">
-                                {{ __('Admin Menu') }}
-                            </x-dropdown-link>
-                        @endif
+                        <x-dropdown-link :href="route('dashboard')">
+                            {{ __('Back to dashboard') }}
+                        </x-dropdown-link>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -76,11 +80,9 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            @if (Auth::user()->isAdmin())
-            <x-responsive-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
-                {{ __('Admin Menu') }}
+            <x-responsive-nav-link :href="route('admin.user.index')" :active="request()->routeIs('admin.*')">
+                {{ __('Users') }}
             </x-responsive-nav-link>
-            @endif
         </div>
 
         <!-- Responsive Settings Options -->
