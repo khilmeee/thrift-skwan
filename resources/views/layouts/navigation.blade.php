@@ -79,11 +79,10 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            @if (Auth::user()->isAdmin())
-            <x-responsive-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
-                {{ __('Admin Menu') }}
+            <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.*')">
+                {{ __('Product') }}
             </x-responsive-nav-link>
-            @endif
+            
         </div>
 
         <!-- Responsive Settings Options -->
@@ -97,6 +96,11 @@
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+                @if (Auth::user()->isAdmin())
+                    <x-responsive-nav-link :href="route('admin.index')">
+                        {{ __('Admin Menu') }}
+                    </x-responsive-nav-link>
+                @endif
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
